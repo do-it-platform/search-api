@@ -1,0 +1,16 @@
+{
+  "name": "elasticsearch-sink",
+  "config": {
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.value.subject.name.strategy": "io.confluent.kafka.serializers.subject.TopicRecordNameStrategy",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "topics": "job-log",
+    "connection.url": "http://elasticsearch:9200",
+    "type.name": "jobs",
+    "transforms": "InsertTimestamp",
+    "transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+    "transforms.InsertTimestamp.timestamp.field": "timestamp"
+  }
+}

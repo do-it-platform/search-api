@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  kconnect:
+    image: confluentinc/cp-kafka-connect
+    ports:
+      - 8083:8083
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafka:29092
+      CONNECT_GROUP_ID: es-kibana-test
+      CONNECT_CONFIG_STORAGE_TOPIC: connect-config-storage
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_TOPIC: connect-offset-storage
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: connect-status-storage
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_REST_ADVERTISED_HOST_NAME: kconnect
+      CONNECT_PLUGIN_PATH: /usr/share/java
+      CONNECT_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.5.1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana-oss:7.5.1
+#    depends_on:
+#      - elasticsearch
+#    ports:
+#      - 5601:5601
+
+networks:
+  default:
+    external:
+      name: job-api_default
