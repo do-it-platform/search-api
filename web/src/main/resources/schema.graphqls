@@ -1,0 +1,16 @@
+type Query {
+  job(id: ID!): Job
+  jobs(latitude: Float, longitude: Float): [Job]
+}
+
+type Job {
+  id: ID!
+  vendorId: ID!
+  title: String!
+  description: String!
+  latitude: Float!
+  longitude: Float!
+  payment: String!
+  createdAt: String!
+  modifiedAt: String!
+}
