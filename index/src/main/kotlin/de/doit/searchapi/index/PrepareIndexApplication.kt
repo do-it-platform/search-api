@@ -1,4 +1,4 @@
-package de.doit.searchapi
+package de.doit.searchapi.index
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
