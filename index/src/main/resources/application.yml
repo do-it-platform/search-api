@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: searchapi-prepare-index
+  kafka:
+    streams:
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+    bootstrap-servers: localhost:9092
+    properties:
+      schema.registry.url: http://localhost:8081
+---
+searchapi:
+  index:
+    kafka:
+      source:
+        topic: jobapi-job-aggregate-state-store-changelog
+      sink:
+        topic: job-index-log
+        numberOfPartitions: 1
+        replicationFactor: 1

@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "location": {
+          "match": "location",
+          "mapping": {
+            "type": "geo_point"
+          }
+        }
+      }
+    ]
+  }
+}

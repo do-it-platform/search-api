@@ -1,0 +1,10 @@
+{
+  "index_patterns": ["doit"],
+  "mappings": {
+    "properties": {
+      "location": {
+        "type": "geo_point"
+      }
+    }
+  }
+}
