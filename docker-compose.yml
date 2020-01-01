@@ -24,6 +24,9 @@ services:
       CONNECT_REST_ADVERTISED_HOST_NAME: kconnect
       CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components
       CONNECT_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KAFKA_HEAP_OPTS: -Xms128m -Xmx128m
+    networks:
+      - jobapi
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.5.1
@@ -32,6 +35,7 @@ services:
       - 9300:9300
     environment:
       - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
 
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:7.5.1
@@ -41,6 +45,6 @@ services:
       - 5601:5601
 
 networks:
-  default:
+  jobapi:
     external:
       name: job-api_default
