@@ -9,6 +9,9 @@
       },
       "modifiedAt": {
         "type": "date"
+      },
+      "vendorId": {
+        "type": "keyword"
       }
     }
   }
