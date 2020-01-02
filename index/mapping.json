@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "properties": {
+      "location": {
+        "type": "geo_point"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "modifiedAt": {
+        "type": "date"
+      }
+    }
+  }
+}

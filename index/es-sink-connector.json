@@ -12,6 +12,6 @@
     "transforms": "TopicToIndex",
     "transforms.TopicToIndex.type": "org.apache.kafka.connect.transforms.RegexRouter",
     "transforms.TopicToIndex.regex": ".*",
-    "transforms.TopicToIndex.replacement": "doit"
+    "transforms.TopicToIndex.replacement": "jobs"
   }
 }

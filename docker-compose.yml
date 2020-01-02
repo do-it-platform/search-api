@@ -26,6 +26,7 @@ services:
       CONNECT_SCHEMA_REGISTRY_URL: http://schema-registry:8081
       KAFKA_HEAP_OPTS: -Xms128m -Xmx128m
     networks:
+      - default
       - jobapi
 
   elasticsearch:
