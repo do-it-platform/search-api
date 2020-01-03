@@ -1,9 +1,11 @@
-version: '3'
+version: '3.7'
 
 services:
 
   kconnect:
-    image: confluentinc/cp-kafka-connect
+    image: confluentinc/cp-kafka-connect-datagen:latest
+    build:
+      context: ./docker
     ports:
       - 8083:8083
     environment:
@@ -28,6 +30,10 @@ services:
     networks:
       - default
       - jobapi
+    volumes:
+      - type: bind
+        source: ./index/src/main/avro/JobIndexEvent.avsc
+        target: /JobIndexEvent.avsc
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.5.1

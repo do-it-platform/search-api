@@ -7,16 +7,38 @@
       "name": "vendorId",
       "type": {
         "type": "string",
-        "logicalType": "UUID"
+        "logicalType": "UUID",
+        "arg.properties": {
+          "regex": "[a-zA-Z]+",
+          "length": 16
+        }
       }
     },
     {
       "name": "title",
-      "type": "string"
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "regex": "[a-z]+",
+          "length": {
+            "min": 10,
+            "max": 25
+          }
+        }
+      }
     },
     {
       "name": "description",
-      "type": "string"
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "regex": "[a-za-za-za-za-za-za-za-za-za-z ]+",
+          "length": {
+            "min": 30,
+            "max": 250
+          }
+        }
+      }
     },
     {
       "name": "location",
@@ -26,12 +48,28 @@
         "fields": [
           {
             "name": "lat",
-            "type": "double",
+            "type": {
+              "type": "double",
+              "arg.properties": {
+                "range": {
+                  "min": -90,
+                  "max": 90
+                }
+              }
+            },
             "doc": "returns the latitude of the geo location"
           },
           {
             "name": "lon",
-            "type": "double",
+            "type": {
+              "type": "double",
+              "arg.properties": {
+                "range": {
+                  "min": -180,
+                  "max": 180
+                }
+              }
+            },
             "doc": "returns the longitude of the geo location"
           }
         ]
@@ -43,14 +81,25 @@
         "type": "bytes",
         "logicalType": "decimal",
         "precision": 2,
-        "scale": 2
+        "scale": 2,
+        "arg.properties": {
+          "options": [
+            "\u0003\u001F"
+          ]
+        }
       }
     },
     {
       "name": "createdAt",
       "type": {
         "type": "long",
-        "logicalType": "timestamp-millis"
+        "logicalType": "timestamp-millis",
+        "arg.properties": {
+          "range": {
+            "min": 1517715775521,
+            "max": 1539273364600
+          }
+        }
       }
     },
     {
@@ -59,7 +108,13 @@
         "null",
         {
           "type": "long",
-          "logicalType": "timestamp-millis"
+          "logicalType": "timestamp-millis",
+          "arg.properties": {
+            "range": {
+              "min": 1539273364600,
+              "max": 1576273364600
+            }
+          }
         }
       ],
       "default": null
