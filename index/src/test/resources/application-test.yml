@@ -1,0 +1,7 @@
+spring:
+  kafka:
+    streams:
+      auto-startup: false
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: de.doit.searchapi.index.MockSpecificAvroSerde
