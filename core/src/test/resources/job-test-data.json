@@ -1,0 +1,2 @@
+{ "index" : { "_index" : "jobs", "_id" : "bf9c0a53-5001-4bbb-bccf-a1ad6f12ad61" } }
+{ "vendorId": "12345", "title": "Tutoring", "description": "Need help with math", "location": {"lat": 51.668001, "lon": -1.0884338}, "payment": 7.99, "createdAt": 1578335992360, "modifiedAt": null }
