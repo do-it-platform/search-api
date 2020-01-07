@@ -13,7 +13,8 @@ internal abstract class EntityMapper {
             vendorId = VendorId(jobEntity.vendorId),
             title = jobEntity.title,
             description = jobEntity.description,
-            location = Job.Location(jobEntity.location.lat, jobEntity.location.lon),
+            latitude = jobEntity.location.lat,
+            longitude = jobEntity.location.lon,
             payment = jobEntity.payment,
             createdAt = jobEntity.createdAt,
             modifiedAt = jobEntity.modifiedAt

@@ -2,14 +2,11 @@ package de.doit.searchapi.web.graphql
 
 import de.doit.searchapi.domain.model.JobId
 import de.doit.searchapi.domain.model.Query
-import de.doit.searchapi.domain.model.VendorId
 import de.doit.searchapi.domain.service.SearchService
 import de.doit.searchapi.web.model.Job
 import graphql.schema.DataFetcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.singleOrNull
-import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.future.future
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,8 +22,8 @@ internal class JobDataFetcher(@Autowired private val searchService: SearchServic
                 job.vendorId,
                 job.title,
                 job.description,
-                job.location.lat,
-                job.location.lon,
+                job.latitude,
+                job.longitude,
                 job.payment.toEngineeringString(),
                 job.createdAt.toString(),
                 job.modifiedAt.toString()
@@ -48,10 +45,7 @@ internal class JobDataFetcher(@Autowired private val searchService: SearchServic
             val longitude: Double? = dataFetchingEnvironment.getArgument("longitude")
             GlobalScope.future {
                 searchService
-                        .search(Query(
-                                latitude = latitude,
-                                longitude = longitude
-                        ))
+                        .search(Query())
                         .map { map(it) }
                         .toList()
             }

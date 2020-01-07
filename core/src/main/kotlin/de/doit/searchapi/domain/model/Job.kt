@@ -6,11 +6,8 @@ data class Job(val id: JobId,
                val vendorId: VendorId,
                val title: String,
                val description: String,
-               val location: Location,
+               val latitude: Double,
+               val longitude: Double,
                val payment: BigDecimal,
                val createdAt: Long,
-               val modifiedAt: Long?) {
-
-    data class Location(val lat: Double, val lon: Double)
-
-}
+               val modifiedAt: Long?)

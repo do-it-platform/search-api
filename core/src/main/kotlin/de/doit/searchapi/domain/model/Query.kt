@@ -1,3 +1,5 @@
 package de.doit.searchapi.domain.model
 
-class Query(var latitude: Double? = null, var longitude: Double? = null)
+data class Query(val location: Location? = null, val distance: Double = 100.0) {
+    data class Location(val lat: Double, val lon: Double)
+}

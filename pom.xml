@@ -51,7 +51,6 @@
 						<args>
 							<arg>-Xjsr305=strict</arg>
 							<arg>-XXLanguage:+InlineClasses</arg>
-							<arg>-Xjvm-default=enable</arg>
 						</args>
 						<compilerPlugins>
 							<plugin>spring</plugin>
