@@ -24,7 +24,7 @@ internal class GraphQLConfig(@Autowired private val jobDataFetcher: JobDataFetch
         return RuntimeWiring.newRuntimeWiring()
                 .type("Query") {
                     it.dataFetcher("job", jobDataFetcher.job())
-                    it.dataFetcher("job", jobDataFetcher.jobs())
+                    it.dataFetcher("jobs", jobDataFetcher.jobs())
                 }
                 .build()
     }

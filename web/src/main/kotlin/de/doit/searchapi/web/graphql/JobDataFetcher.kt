@@ -25,8 +25,8 @@ internal class JobDataFetcher(@Autowired private val searchService: SearchServic
                 job.vendorId,
                 job.title,
                 job.description,
-                job.latitude,
-                job.longitude,
+                job.location.lat,
+                job.location.lon,
                 job.payment.toEngineeringString(),
                 job.createdAt.toString(),
                 job.modifiedAt.toString()
