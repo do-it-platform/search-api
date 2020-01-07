@@ -1,0 +1,8 @@
+query {
+    job(id: "bf9c0a53-5001-4bbb-bccf-a1ad6f12ad61") {
+        id,
+        vendorId,
+        title,
+        description
+    }
+}

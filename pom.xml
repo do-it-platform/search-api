@@ -32,6 +32,13 @@
 				<artifactId>mapstruct</artifactId>
 				<version>${mapstruct.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.jeasy</groupId>
+				<artifactId>easy-random-core</artifactId>
+				<version>4.1.0</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
