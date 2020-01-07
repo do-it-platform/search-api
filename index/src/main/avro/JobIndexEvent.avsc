@@ -19,11 +19,18 @@
       "type": {
         "type": "string",
         "arg.properties": {
-          "regex": "[a-z]+",
-          "length": {
-            "min": 10,
-            "max": 25
-          }
+          "options": [
+            "Help cutting the lawn",
+            "Babysitting my 6-year-old this Friday evening",
+            "Walk the dog tonight",
+            "We need a Santa for December 24th",
+            "Help buying groceries",
+            "Private tutoring German for a 8th-grader",
+            "Help watering the lawn while we’re on vacation",
+            "I need a clown for my son’s birthday, 2-3 h",
+            "Who could run some errands for my grandma?",
+            "A haircut for my three girls"
+          ]
         }
       }
     },
@@ -32,11 +39,18 @@
       "type": {
         "type": "string",
         "arg.properties": {
-          "regex": "[a-za-za-za-za-za-za-za-za-za-z ]+",
-          "length": {
-            "min": 30,
-            "max": 250
-          }
+          "options": [
+            "I need help cutting the lawn around my house. The property is pretty large and because of my rheumatism I’m not able to take care of it myself. If possible this weekend would be great. I have a lawnmower and a rake, please bring your own working gloves, if necessary. For the whole lawn i offer 50 EUR.",
+            "Because of a short term appointment I need someone to babysit my son this Friday, 6-8 p.m. He is 6 years old, very open and communicative and loves to play outside or read one of his books. You should play with him and make some sandwiches for dinner. Our neighbour will be around, if you need help. We offer 15 EUR per hour.",
+            "I broke my leg two days ago and need someone to walk my dog tonight around 7 p.m. It’s a Husky so he needs long walks (1-2 hours every day). He is lovely and well trained If you are available and interested, contact me and we will talk about the payment.",
+            "We need someone to play Santa for our 3-year-old daughter on December 24th between 8 p.m. and 9 p.m. We will give you the gifts in advance. You should eat some cookies and drink the milk (both outside on the porch) and then come in to place the gifts under the tree. Maybe you could say \"Ho-ho-ho!\" or something, but let’s talk about the details on the phone. Contact us, if you are interested. We pay well!",
+            "Who has time today to buy my groceries? I’m stuck at work and will not be out before the stores close. I will send you the list with all the things I need. You can make 10 EUR!",
+            "My son needs urgent help studying for his German exam on Friday, especially grammar. If you are a tutor with some experience in tutoring or teaching please contact me as soon as possible! We would love to book you for 4-6 hours in the next two days and pay 15 Eur per hour.",
+            "We are on vacation this weekend and because of the summerheat we need someone to water our lawn every evening. It would be Friday, Saturday and Sunday. You just need to turn on the sprinkler, wait for 15 minutes and turn it off again. For the whole weekend we would pay you 25 EUR.",
+            "My son turns 5 this Saturday and is going to have a big birthday party at our house with all his friends. We want to surprise him with a clown who knows some tricks like juggling or riding a unicycle. If you are interested and available please contact us. The party starts at 2 p.m. so if you could be there around 3 p.m. for 2 or 3 hours would be great! Hourly pay: 15 EUR.",
+            "My grandma needs your help! Usually I run her errands, but I’m sick at home and not able to get outside for a long shopping trip. So you should come by my house and I will give you all the information you need to run the errands and bring them to my grandma’s house. It should happen this week and should not take longer than 3 hours. I pay you 20 EUR for the whole thing.",
+            "Who can give my 3 daughters a proper haircut? Because the hairdresser is way to expensive and the girls won’t let me cut their hair since I cut them way to short last time, I need someone who has experience in cutting hair. I offer 10 EUR per haircut!"
+          ]
         }
       }
     },
