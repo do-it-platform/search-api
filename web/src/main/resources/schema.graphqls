@@ -1,6 +1,6 @@
 type Query {
   job(id: ID!): Job
-  jobs(latitude: Float, longitude: Float): [Job]
+  jobs(location: Location, distance: Float = 50.0): [Job]
 }
 
 type Job {
@@ -13,4 +13,9 @@ type Job {
   payment: String!
   createdAt: String!
   modifiedAt: String!
+}
+
+input Location {
+  latitude: Float!
+  longitude: Float!
 }

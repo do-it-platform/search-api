@@ -2,9 +2,11 @@ package de.doit.searchapi.web.graphql
 
 import de.doit.searchapi.domain.model.JobId
 import de.doit.searchapi.domain.model.Query
+import de.doit.searchapi.domain.model.Query.Location
 import de.doit.searchapi.domain.service.SearchService
-import de.doit.searchapi.web.model.Job
+import de.doit.searchapi.web.model.JobResponse
 import graphql.schema.DataFetcher
+import graphql.schema.DataFetchingEnvironment
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
@@ -14,41 +16,36 @@ import org.springframework.stereotype.Component
 import java.util.concurrent.CompletableFuture
 
 @Component
-internal class JobDataFetcher(@Autowired private val searchService: SearchService) {
+internal class JobDataFetcher(@Autowired private val searchService: SearchService,
+                              @Autowired private val jobMapper: JobMapper) {
 
-    companion object {
-        fun map(job: de.doit.searchapi.domain.model.Job): Job = Job(
-                job.id,
-                job.vendorId,
-                job.title,
-                job.description,
-                job.latitude,
-                job.longitude,
-                job.payment.toEngineeringString(),
-                job.createdAt.toString(),
-                job.modifiedAt.toString()
-        )
-    }
-
-    fun job(): DataFetcher<CompletableFuture<Job?>> {
+    fun job(): DataFetcher<CompletableFuture<JobResponse?>> {
         return DataFetcher { dataFetchingEnvironment ->
             val jobId = JobId(dataFetchingEnvironment.getArgument("id"))
+
             GlobalScope.future {
-                searchService.byId(jobId)?.let { map(it) }
+                searchService.byId(jobId)?.let { jobMapper.mapToDTO(it) }
             }
         }
     }
 
-    fun jobs(): DataFetcher<CompletableFuture<List<Job>>> {
+    fun jobs(): DataFetcher<CompletableFuture<List<JobResponse>>> {
         return DataFetcher { dataFetchingEnvironment ->
-            val latitude: Double? = dataFetchingEnvironment.getArgument("latitude")
-            val longitude: Double? = dataFetchingEnvironment.getArgument("longitude")
+            val location = dataFetchingEnvironment.getLocation()
+            val distance: Double = dataFetchingEnvironment.getArgument("distance")
+
             GlobalScope.future {
                 searchService
-                        .search(Query())
-                        .map { map(it) }
+                        .search(Query(location = location, distance = distance))
+                        .map { jobMapper.mapToDTO(it) }
                         .toList()
             }
+        }
+    }
+
+    private fun DataFetchingEnvironment.getLocation(): Location? {
+        return getArgument<Map<String, Double>>("location")?.let {
+            Location(it.getValue("latitude"), it.getValue("longitude"))
         }
     }
 

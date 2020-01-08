@@ -1,5 +1,5 @@
 query {
-    job(id: "bf9c0a53-5001-4bbb-bccf-a1ad6f12ad61") {
+    jobs(location: { latitude: 51.0, longitude: -2.0 }) {
         id,
         vendorId,
         title,
