@@ -54,6 +54,16 @@ internal class ElasticsearchIntegrationTest(@Autowired private val searchService
                 .first().containsMappedTestData()
     }
 
+    @Test
+    internal fun searchWithEmptyQueryShouldReturnAll() = runBlocking {
+        val geoSearchResult = searchService.search(Query()).toList()
+
+        assertThat(geoSearchResult)
+                .hasSize(1)
+                .first().containsMappedTestData()
+    }
+
+
     private fun ObjectAssert<Job>.containsMappedTestData() {
         satisfies {
             it.apply {
