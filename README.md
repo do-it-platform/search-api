@@ -19,4 +19,6 @@ curl -XPOST http://localhost:8083/connectors -H "Content-Type: application/json"
 
 ## TODO
 
-* improve test data 
+* improve test data
+* test kotlin-jpa plugin
+* implement paging

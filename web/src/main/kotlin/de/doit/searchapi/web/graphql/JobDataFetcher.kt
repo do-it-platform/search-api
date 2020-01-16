@@ -33,10 +33,11 @@ internal class JobDataFetcher(@Autowired private val searchService: SearchServic
         return DataFetcher { dataFetchingEnvironment ->
             val location = dataFetchingEnvironment.getLocation()
             val distance: Double = dataFetchingEnvironment.getArgument("distance")
+            val first: Int = dataFetchingEnvironment.getArgument("first")
 
             GlobalScope.future {
                 searchService
-                        .search(Query(location = location, distance = distance))
+                        .search(Query(location = location, distance = distance, size = first))
                         .map { jobMapper.mapToDTO(it) }
                         .toList()
             }

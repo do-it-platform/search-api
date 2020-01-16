@@ -1,6 +1,6 @@
 type Query {
   job(id: ID!): Job
-  jobs(location: Location, distance: Float = 50.0): [Job]
+  jobs(location: Location, distance: Float = 50.0, first: Int = 30): [Job]
 }
 
 type Job {

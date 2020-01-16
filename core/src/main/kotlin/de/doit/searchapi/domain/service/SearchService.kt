@@ -12,8 +12,10 @@ import org.elasticsearch.index.query.QueryBuilder
 import org.elasticsearch.index.query.QueryBuilders
 import org.elasticsearch.index.query.QueryBuilders.geoDistanceQuery
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.elasticsearch.core.ReactiveElasticsearchTemplate
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder
 import org.springframework.stereotype.Service
 
 @Service
@@ -40,8 +42,12 @@ class SearchService internal constructor(@Autowired private val elasticsearchTem
                 .apply {
                     filterByLocation(query)
                 }
-                .let { NativeSearchQuery(it) }
-
+                .let {
+                    NativeSearchQueryBuilder()
+                            .withQuery(it)
+                            .withPageable(PageRequest.of(0, query.size))
+                            .build()
+                }
 
         private fun BoolQueryBuilder.filterByLocation(query: Query) {
             query.location

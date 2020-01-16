@@ -91,7 +91,7 @@ class GraphqlSearchApiTest(@Autowired private val testClient: WebTestClient) {
                             }
                 }
 
-        coVerify { searchService.search(Query(location = Location(51.0, -2.0), distance = 50.0)) }
+        coVerify { searchService.search(Query(location = Location(51.0, -2.0), distance = 50.0, size = 30)) }
     }
 
     companion object {
