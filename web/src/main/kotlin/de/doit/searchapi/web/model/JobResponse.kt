@@ -1,10 +1,7 @@
 package de.doit.searchapi.web.model
 
-import de.doit.searchapi.domain.model.JobId
-import de.doit.searchapi.domain.model.VendorId
-
-data class JobResponse(val id: JobId,
-                       val vendorId: VendorId,
+data class JobResponse(val id: String,
+                       val vendorId: String,
                        val title: String,
                        val description: String,
                        val latitude: Double,

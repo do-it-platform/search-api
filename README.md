@@ -17,6 +17,15 @@ curl -XPUT http://localhost:9200/jobs -H "Content-Type: application/json" --data
 curl -XPOST http://localhost:8083/connectors -H "Content-Type: application/json" --data "@index/es-sink-connector.json"
 ```
 
+## Run search-api
+
+```bash
+docker-compose up
+./mvnw install -DskipTests && ./mvnw spring-boot:run -pl web
+```
+
+Graphiql is accesible under root path [click](http://localhost:8080/)
+
 ## TODO
 
 * improve test data

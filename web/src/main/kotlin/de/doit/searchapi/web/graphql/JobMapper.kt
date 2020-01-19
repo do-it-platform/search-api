@@ -8,8 +8,8 @@ import org.mapstruct.Mapper
 internal abstract class JobMapper {
 
     fun mapToDTO(job: Job): JobResponse = JobResponse(
-            id = job.id,
-            vendorId = job.vendorId,
+            id = job.id.value,
+            vendorId = job.vendorId.value,
             title = job.title,
             description = job.description,
             latitude = job.latitude,
