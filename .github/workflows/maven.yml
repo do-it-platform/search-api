@@ -1,0 +1,55 @@
+name: Java CI
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+
+env:
+  IMAGE_NAME: web
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 12
+      uses: actions/setup-java@v1
+      with:
+        java-version: 12
+    - name: Build with Maven
+      run: ./mvnw -B package --file pom.xml
+    - name: Log into registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+    - name: Build web image
+      run: docker build . --file web/Dockerfile --tag web-image
+    - name: Push web image
+      run: |
+        IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/web
+        # Strip git ref prefix from version
+        echo $GITHUB_SHA
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+        # Use Docker `latest` tag convention
+        [ "$VERSION" == "master" ] && VERSION=$GITHUB_SHA
+        echo IMAGE_ID=$IMAGE_ID
+        echo VERSION=$VERSION
+        docker tag web-image $IMAGE_ID:latest
+        docker tag web-image $IMAGE_ID:$VERSION
+        docker push $IMAGE_ID:$VERSION $IMAGE_ID:latest
+    - name: Build index image
+      run: docker build . --file index/Dockerfile --tag index-image
+    - name: Push index image
+      run: |
+        IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/index
+        # Strip git ref prefix from version
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+        # Use Docker `latest` tag convention
+        [ "$VERSION" == "master" ] && VERSION=$GITHUB_SHA
+        echo IMAGE_ID=$IMAGE_ID
+        echo VERSION=$VERSION
+        docker tag index-image $IMAGE_ID:latest
+        docker tag index-image $IMAGE_ID:$VERSION
+        docker push $IMAGE_ID:$VERSION $IMAGE_ID:latest
