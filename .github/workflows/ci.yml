@@ -6,9 +6,6 @@ on:
     branches:
       - master
 
-env:
-  IMAGE_NAME: web
-
 jobs:
   build:
 
@@ -21,7 +18,10 @@ jobs:
       with:
         java-version: 12
     - name: Build with Maven
-      run: ./mvnw -B package --file pom.xml
+      env:
+        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: ./mvnw -B --settings settings.xml --file pom.xml package
     - name: Log into registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
     - name: Build web image
@@ -30,15 +30,15 @@ jobs:
       run: |
         IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/web
         # Strip git ref prefix from version
-        echo $GITHUB_SHA
         VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
         # Use Docker `latest` tag convention
-        [ "$VERSION" == "master" ] && VERSION=$GITHUB_SHA
+        [ "$VERSION" == "master" ] && VERSION=$(git rev-parse --short HEAD)
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
         docker tag web-image $IMAGE_ID:latest
+        docker push $IMAGE_ID:latest
         docker tag web-image $IMAGE_ID:$VERSION
-        docker push $IMAGE_ID:$VERSION $IMAGE_ID:latest
+        docker push $IMAGE_ID:$VERSION
     - name: Build index image
       run: docker build . --file index/Dockerfile --tag index-image
     - name: Push index image
@@ -47,9 +47,10 @@ jobs:
         # Strip git ref prefix from version
         VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
         # Use Docker `latest` tag convention
-        [ "$VERSION" == "master" ] && VERSION=$GITHUB_SHA
+        [ "$VERSION" == "master" ] && VERSION=$(git rev-parse --short HEAD)
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
         docker tag index-image $IMAGE_ID:latest
+        docker push $IMAGE_ID:latest
         docker tag index-image $IMAGE_ID:$VERSION
-        docker push $IMAGE_ID:$VERSION $IMAGE_ID:latest
+        docker push $IMAGE_ID:$VERSION

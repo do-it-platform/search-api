@@ -20,13 +20,20 @@
             <id>confluent-repo</id>
             <url>https://packages.confluent.io/maven/</url>
         </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub do-it Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/do-it-platform/maven-packages</url>
+            <snapshots><enabled>true</enabled></snapshots>
+            <releases><enabled>true</enabled></releases>
+        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>de.doit.jobapi</groupId>
             <artifactId>events</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.avro</groupId>
