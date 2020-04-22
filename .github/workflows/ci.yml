@@ -20,7 +20,7 @@ jobs:
     - name: Build with Maven
       env:
         GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MVN_ACCESS_TOKEN }}
       run: ./mvnw -B --settings settings.xml --file pom.xml package
     - name: Log into registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
