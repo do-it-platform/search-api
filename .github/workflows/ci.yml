@@ -19,7 +19,7 @@ jobs:
         java-version: 12
     - name: Build with Maven
       env:
-        GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+        GITHUB_USERNAME: x-access-token
         GITHUB_TOKEN: ${{ secrets.MVN_ACCESS_TOKEN }}
       run: ./mvnw -B --settings settings.xml --file pom.xml package
     - name: Log into registry
