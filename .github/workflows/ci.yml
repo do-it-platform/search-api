@@ -35,10 +35,10 @@ jobs:
         [ "$VERSION" == "master" ] && VERSION=$(git rev-parse --short HEAD)
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
-        docker tag web-image $IMAGE_ID:latest
-        docker push $IMAGE_ID:latest
         docker tag web-image $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
+        docker tag web-image $IMAGE_ID:latest
+        docker push $IMAGE_ID:latest
     - name: Build index image
       run: docker build . --file index/Dockerfile --tag index-image
     - name: Push index image
@@ -50,7 +50,7 @@ jobs:
         [ "$VERSION" == "master" ] && VERSION=$(git rev-parse --short HEAD)
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
-        docker tag index-image $IMAGE_ID:latest
-        docker push $IMAGE_ID:latest
         docker tag index-image $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
+        docker tag index-image $IMAGE_ID:latest
+        docker push $IMAGE_ID:latest
